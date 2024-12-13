@@ -1,0 +1,181 @@
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0d0d0d;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+h1 {
+    color: #ff4081;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* Standard Header (Welcome Page) */
+header {
+    background-color: #1e1e1e;
+    padding: 15px 20px;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+header nav ul li {
+    display: inline;
+}
+
+header nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+    color: #ff4081;
+}
+
+/* Smaller Header for Other Pages */
+header.small {
+    background-color: #1e1e1e;
+    padding: 10px 15px;
+    text-align: left;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header.small nav ul {
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+header.small nav ul li a {
+    font-size: 14px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    text-align: center;
+    padding: 3px 5px;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    font-size: 12px;
+    border-top: 1px solid #444;
+    opacity: 0.9;
+}
+
+/* Main Content */
+main {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 50px;
+}
+
+/* Form Styles */
+form {
+    background: #292929;
+    padding: 25px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #ff4081;
+    font-size: 14px;
+}
+
+input, button, a {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input {
+    background: #1e1e1e;
+    color: #ffffff;
+    outline: none;
+    border: 1px solid #444;
+    transition: border 0.3s;
+}
+
+input:focus {
+    border-color: #ff4081;
+}
+
+button {
+    background: #ff4081;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #e60073;
+}
+
+a {
+    text-align: center;
+    text-decoration: none;
+    background: #007bff;
+    color: #ffffff;
+    display: inline-block;
+    margin-top: 15px;
+    transition: background 0.3s;
+}
+
+a:hover {
+    background: #0056b3;
+}
+
+/* Navigation Buttons */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.navigation a {
+    width: 48%;
+    background: #333;
+    color: #ffffff;
+    text-align: center;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.navigation a:hover {
+    background: #555;
+}

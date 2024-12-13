@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Concerts</title>
+    <link rel="stylesheet" href="app.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h1>TechFrexMusic</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="welcome.html">Home</a></li>
+                <li><a href="add-concert.html">Add Concert</a></li>
+                <li><a href="edit-concert.html">Edit Concert</a></li>
+                <li><a href="view-concerts.html" class="active">View Concerts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>All Concerts</h1>
+        <div id="concerts-list"></div>
+    </main>
+    <footer>
+        <p>© 2024 TechFrexMusic. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        fetch('api/concerts')
+            .then(response => response.json())
+            .then(concerts => {
+                const concertsListContainer = document.getElementById('concerts-list');
+                
+                if (concerts && concerts.length > 0) {
+                    concerts.forEach(concert => {
+                        const concertDiv = document.createElement('div');
+                        concertDiv.classList.add('concert');
+
+                        concertDiv.innerHTML = `
+                            <h2>${concert.performer}</h2>
+                            <p><strong>Location:</strong> ${concert.location}</p>
+                            <p><strong>Date and Time:</strong> ${new Date(concert.dateAndTime).toLocaleString()}</p>
+                            <p><strong>Capacity:</strong> ${concert.capacity}</p>
+                            <p><strong>Price:</strong> ${concert.price} €</p>
+                            <button onclick="deleteConcert(${concert.id})">Delete</button>
+                        `;
+                        
+                        concertsListContainer.appendChild(concertDiv);
+                    });
+                } else {
+                    concertsListContainer.innerHTML = "<p>No concerts available</p>";
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching concerts:', error);
+            });
+
+        function deleteConcert(concertId) {
+            fetch(`api/concerts/${concertId}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Concert deleted successfully');
+                    window.location.reload();
+                } else {
+                    alert('Failed to delete concert');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting concert:', error);
+            });
+        }
+    </script>
+</body>
+
+</html>

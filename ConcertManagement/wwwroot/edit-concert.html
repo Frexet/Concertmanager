@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Concert</title>
+    <link rel="stylesheet" href="app.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        async function loadConcerts() {
+            const response = await fetch("/api/concerts");
+            const concerts = await response.json();
+            const select = document.getElementById("concertSelector");
+
+            concerts.forEach(concert => {
+                const option = document.createElement("option");
+                option.value = concert.id;
+                option.textContent = `${concert.performer} at ${concert.location} (${new Date(concert.dateAndTime).toLocaleString()})`;
+                select.appendChild(option);
+            });
+        }
+
+        async function populateForm(concertId) {
+            if (!concertId) return;
+
+            const response = await fetch(`/api/concerts/${concertId}`);
+            const concert = await response.json();
+
+            document.getElementById("location").value = concert.location;
+            document.getElementById("performer").value = concert.performer;
+            document.getElementById("dateAndTime").value = concert.dateAndTime.slice(0, 16); // Format for datetime-local
+            document.getElementById("capacity").value = concert.capacity;
+            document.getElementById("price").value = concert.price;
+        }
+
+        async function editConcert(event) {
+            event.preventDefault();
+
+            const id = document.getElementById("concertSelector").value;
+            const formData = new FormData(event.target);
+            const concert = Object.fromEntries(formData.entries());
+            concert.DateAndTime = new Date(concert.DateAndTime).toISOString();
+
+            const response = await fetch(`/api/concerts/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(concert)
+            });
+
+            if (response.ok) {
+                alert("Concert updated successfully!");
+                window.location.href = "view-concerts.html";
+            } else {
+                alert("Failed to update concert.");
+            }
+        }
+
+        window.onload = loadConcerts;
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="welcome.html">Home</a></li>
+                <li><a href="add-concert.html">Add Concert</a></li>
+                <li><a href="edit-concert.html">Edit Concert</a></li>
+                <li><a href="view-concerts.html">View Concerts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Edit Concert</h1>
+        <form onsubmit="editConcert(event)">
+            <label for="concertSelector">Select a Concert</label>
+            <select id="concertSelector" name="ConcertId" onchange="populateForm(this.value)" required>
+                <option value="">-- Select a Concert --</option>
+            </select>
+
+            <label for="location">Location</label>
+            <input type="text" id="location" name="Location" placeholder="Enter location" required>
+
+            <label for="performer">Performer</label>
+            <input type="text" id="performer" name="Performer" placeholder="Enter performer" required>
+
+            <label for="dateAndTime">Date and Time</label>
+            <input type="datetime-local" id="dateAndTime" name="DateAndTime" required>
+
+            <label for="capacity">Capacity</label>
+            <input type="number" id="capacity" name="Capacity" placeholder="Enter capacity" required>
+
+            <label for="price">Price (in €)</label>
+            <input type="number" step="0.01" id="price" name="Price" placeholder="Enter price in €" required>
+
+            <button type="submit">Update Concert</button>
+        </form>
+    </main>
+    <footer>
+        <p>© 2024 TechFrexMusic. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

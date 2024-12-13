@@ -1,0 +1,50 @@
+
+# Användarspecifika filer
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Byggresultat
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bld/
+[Oo]bj/
+[Bb]in/
+[Ll]og/
+
+# Visual Studio-specifika filer
+.vs/
+*.vcxproj.user
+*.pdb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# macOS-specifika filer
+.DS_Store
+
+# Node.js-moduler
+node_modules/
+
+# Paketfiler
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+# Loggfiler
+*.log
+
+# Publiceringsfiler
+*.publish.xml
+*.azurePubxml
+PublishScripts/
+
+# Användarspecifika inställningar
+.vscode/
+*.DotSettings.user
